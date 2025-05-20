@@ -3,28 +3,26 @@ import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
-export default function HomePage() {
+export default function Home() {
   return (
-    <main className="p-4 space-y-4">
+    <main className="p-4">
       <Tabs defaultValue="vorsorge">
         <TabsList>
           <TabsTrigger value="vorsorge">Vorsorge</TabsTrigger>
-          <TabsTrigger value="versicherung">Versicherung</TabsTrigger>
+          <TabsTrigger value="rente">Rente</TabsTrigger>
         </TabsList>
         <TabsContent value="vorsorge">
           <Card>
             <CardContent>
-              <h2 className="text-xl font-semibold mb-2">Vorsorgeübersicht</h2>
-              <Progress value={60} />
+              <h1 className="text-xl font-bold mb-2">Vorsorge</h1>
+              <Progress value={50} />
+              <Button>Klick mich</Button>
             </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="versicherung">
+        <TabsContent value="rente">
           <Card>
-            <CardContent>
-              <p>Weitere Themen...</p>
-              <Button>Beratung starten</Button>
-            </CardContent>
+            <CardContent>Details zur Rente</CardContent>
           </Card>
         </TabsContent>
       </Tabs>

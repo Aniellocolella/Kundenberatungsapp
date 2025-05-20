@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export function Card({ children }: { children: ReactNode }) {
-  return <div className="bg-white shadow rounded-2xl p-4">{children}</div>;
+  return <div style={{ border: "1px solid #ccc", borderRadius: 8, padding: 16 }}>{children}</div>;
 }
 
 export function CardContent({ children }: { children: ReactNode }) {

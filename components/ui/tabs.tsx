@@ -1,31 +1,52 @@
-import { useState, ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 export function Tabs({ defaultValue, children }: { defaultValue: string; children: ReactNode }) {
-  const [value, setValue] = useState(defaultValue);
-  const tabs = Array.isArray(children) ? children.filter(child => child.type.name === "TabsTrigger") : [];
-  const contents = Array.isArray(children) ? children.filter(child => child.type.name === "TabsContent") : [];
+  const [active, setActive] = useState(defaultValue);
+  const childrenArray = Array.isArray(children) ? children : [children];
 
   return (
-    <div className="space-y-2">
-      <div className="flex gap-2">{tabs.map(tab =>
-        tab.props.value === value
-          ? { ...tab, props: { ...tab.props, active: true, onClick: () => setValue(tab.props.value) } }
-          : { ...tab, props: { ...tab.props, active: false, onClick: () => setValue(tab.props.value) } }
-      )}</div>
-      {contents.map(content => content.props.value === value && content)}
+    <div>
+      {childrenArray.map((child: any) =>
+        child.type.name === "TabsList"
+          ? { ...child, props: { ...child.props, active, setActive } }
+          : null
+      )}
+      {childrenArray.map((child: any) =>
+        child.type.name === "TabsContent" && child.props.value === active ? child : null
+      )}
     </div>
   );
 }
 
-export function TabsList({ children }: { children: ReactNode }) {
-  return <div className="flex gap-2">{children}</div>;
+export function TabsList({ children, active, setActive }: any) {
+  return (
+    <div style={{ display: "flex", gap: 8 }}>
+      {children.map((child: any) =>
+        child.type.name === "TabsTrigger"
+          ? {
+              ...child,
+              props: {
+                ...child.props,
+                active: child.props.value === active,
+                onClick: () => setActive(child.props.value),
+              }
+            }
+          : null
+      )}
+    </div>
+  );
 }
 
-export function TabsTrigger({ value, children, active = false, onClick = () => {} }: any) {
+export function TabsTrigger({ value, children, onClick, active }: any) {
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 rounded-full ${active ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`}
+      style={{
+        padding: "8px 16px",
+        backgroundColor: active ? "#0070f3" : "#ddd",
+        color: active ? "white" : "black",
+        borderRadius: 4,
+      }}
     >
       {children}
     </button>
@@ -33,5 +54,5 @@ export function TabsTrigger({ value, children, active = false, onClick = () => {
 }
 
 export function TabsContent({ value, children }: { value: string; children: ReactNode }) {
-  return <div>{children}</div>;
+  return <div style={{ marginTop: 16 }}>{children}</div>;
 }

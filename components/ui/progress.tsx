@@ -1,15 +1,18 @@
 interface ProgressProps {
   value: number;
-  className?: string;
 }
 
-export function Progress({ value, className = "" }: ProgressProps) {
+export function Progress({ value }: ProgressProps) {
   return (
-    <div className={`w-full bg-gray-200 rounded-full h-3 ${className}`}>
+    <div style={{ width: "100%", backgroundColor: "#eee", borderRadius: 4 }}>
       <div
-        className="bg-blue-600 h-3 rounded-full transition-all duration-300"
-        style={{ width: `${value}%` }}
-      ></div>
+        style={{
+          width: value + "%",
+          height: 10,
+          backgroundColor: "#0070f3",
+          borderRadius: 4
+        }}
+      />
     </div>
   );
 }
