@@ -7,8 +7,8 @@ export function Tabs({ defaultValue, children }: { defaultValue: string; childre
 
   return (
     <div className="space-y-2">
-      <div className="flex gap-2">{tabs.map(tab => 
-        tab.props.value === value 
+      <div className="flex gap-2">{tabs.map(tab =>
+        tab.props.value === value
           ? { ...tab, props: { ...tab.props, active: true, onClick: () => setValue(tab.props.value) } }
           : { ...tab, props: { ...tab.props, active: false, onClick: () => setValue(tab.props.value) } }
       )}</div>
@@ -25,7 +25,7 @@ export function TabsTrigger({ value, children, active = false, onClick = () => {
   return (
     <button
       onClick={onClick}
-      className={\`px-4 py-2 rounded-full \${active ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}\`}
+      className={`px-4 py-2 rounded-full ${active ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'}`}
     >
       {children}
     </button>

@@ -17,7 +17,7 @@ export function Button({ onClick, children, variant = "default", disabled = fals
     <button
       onClick={onClick}
       disabled={disabled}
-      className={\`\${base} \${variants[variant]} \${disabled ? 'opacity-50 cursor-not-allowed' : ''}\`}
+      className={`${base} ${variants[variant]} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
     >
       {children}
     </button>
